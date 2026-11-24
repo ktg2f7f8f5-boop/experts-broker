@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>وسيط الخبراء</title>
+<style>
+:root{--bg:#faf7f0;--cd:#fff;--tx:#1f2a24;--mu:#6b756e;--ac:#1d7a55;--bd:#e5dfd0;--bad:#b3402f}
+@media(prefers-color-scheme:dark){:root{--bg:#141916;--cd:#1d2420;--tx:#eef2ee;--mu:#9aa69e;--ac:#43b787;--bd:#2c3630;--bad:#e5806f}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font-family:Tahoma,"Noto Naskh Arabic",sans-serif;line-height:1.6}
+.w{max-width:560px;margin:0 auto;padding:16px}.c{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-bottom:12px}
+input{width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit;margin:4px 0 8px}
+button,a.b{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:9px 12px;background:var(--ac);color:#fff;font-weight:600;text-decoration:none;text-align:center}
+.o{background:transparent!important;color:var(--ac)!important;border:1px solid var(--ac)!important}
+.r{display:flex;justify-content:space-between;align-items:center;gap:8px}.m{font-size:13px;color:var(--mu)}.pr{color:var(--ac);font-weight:700}
+.ch{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.ch button{background:var(--bg);color:var(--tx);border:1px solid var(--bd)}.ch button.on{border-color:var(--ac);color:var(--ac)}.ch button:disabled{opacity:.4}
+.hide{display:none}.er{color:var(--bad);font-size:13px}#qr{display:flex;justify-content:center;padding:10px;background:#fff;border-radius:10px;width:fit-content;margin:8px auto}
+.v{direction:ltr;text-align:left;background:var(--bg);padding:8px;border-radius:8px;word-break:break-all;font-size:13px}.bt{display:flex;gap:6px;margin:8px 0}.bt>*{flex:1}
+</style></head><body><div class="w">
+<div class="r"><div class="r" style="justify-content:flex-start"><img id="lg" class="hide" style="height:40px;border-radius:8px"><h2 id="pl" style="margin:0">وسيط الخبراء</h2></div><div id="who"></div></div><p class="m" id="tg" style="margin:2px 0"></p>
+<div class="bt"><a class="b o" id="ca">📞 اتصال</a><a class="b o" id="cw" target="_blank">💬 واتساب</a><a class="b o" id="ce">✉️ عروض</a></div>
+<div class="bt"><button class="o" onclick="go(1)">الخبراء</button><button class="o" onclick="go(2)">حجوزاتي</button><button class="o" onclick="go(3)">انضم كخبير</button><button class="o" onclick="go(6)">استفسار</button></div>
+
+<div id="v1"></div>
+<div id="v2" class="hide"></div>
+<div id="v3" class="hide"><div class="c"><b>طلب انضمام خبير</b><p class="m">تراجع المنصة طلبك. شهادات الخبرة شرط للاعتماد والتعاقد وستُطلب لاحقًا.</p>
+<input id="an" placeholder="الاسم"><input id="af" placeholder="المجال"><input id="apr" placeholder="سعر الساعة المقترح"><input id="aph" placeholder="الهاتف" dir="ltr"><input id="aem" placeholder="البريد" dir="ltr"><input id="aav" placeholder="الأيام والأوقات المتاحة"><input id="abi" maxlength="160" placeholder="نبذة مختصرة"><input id="acv" placeholder="السيرة الذاتية باختصار">
+<div class="er" id="aer"></div><button onclick="apply()">إرسال الطلب</button></div></div>
+<div id="v6" class="hide"><div class="c"><b>استفسار أو تواصل</b><p class="m">اكتب رسالتك وسنرد عليك. لا يتم التواصل المباشر بين العميل والخبير إلا بعد موافقة المنصة.</p><input id="qn" placeholder="الاسم"><input id="qc" placeholder="هاتفك أو بريدك" dir="ltr"><input id="qm" placeholder="رسالتك"><div class="er" id="qe"></div><button onclick="sendQ()">إرسال</button></div></div>
+<div id="v4" class="hide"><div class="c"><b id="at">دخول</b><input id="un" placeholder="الاسم (اختياري)" class="hide"><input id="up" placeholder="رقم الهاتف (اختياري)" dir="ltr" class="hide"><input id="ue" type="email" placeholder="البريد الإلكتروني" dir="ltr"><input id="uw" type="password" placeholder="الرقم السري">
+<div class="er" id="uer"></div><div class="bt"><button onclick="auth()" id="ub">دخول</button><button class="o" onclick="sw()">إنشاء حساب</button></div></div></div>
+<div id="v5" class="hide"><div class="c"><div class="r"><b id="bt"></b><button class="o" onclick="go(1)">رجوع</button></div>
+<div class="m">اليوم</div><div class="ch" id="dy"></div><div class="m">الوقت (60 دقيقة)</div><div class="ch" id="tm"></div>
+<p>الإجمالي: <span class="pr" id="tot"></span></p><div class="m">الدفع إلى حسابات المنصة</div><div class="ch" id="pm"></div>
+<div id="pay" class="hide"><div id="qr"></div><div class="v" id="pv"></div><div class="bt"><button class="o" onclick="cp()">نسخ</button></div><button onclick="done()" style="width:100%">دفعت، أرسل الحجز ✓</button></div>
+<div class="er" id="ber"></div><div id="dn" class="hide pr"></div></div></div>
+<div id="v7" class="hide"><div class="c"><div class="r"><b id="pt"></b><button class="o" onclick="go(1)">رجوع</button></div><p id="pb" style="white-space:pre-wrap"></p></div></div>
+<div class="m" style="text-align:center;margin-top:10px"><a href="#" onclick="pg('about');return false">من نحن</a> · <a href="#" onclick="pg('terms');return false">الشروط والخصوصية</a></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const SUPABASE_URL="https://tbwjnqhlaqpcojekvnwn.supabase.co",SUPABASE_KEY="sb_publishable_cxidRJn8Ls2Izri3b5xFVg_-M68TjGy";
+const SB=supabase.createClient(SUPABASE_URL,SUPABASE_KEY),$=i=>document.getElementById(i),DN=["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"],NM={pi:"إنستا باي",pw:"محفظة إلكترونية",pb:"حساب بنكي",pv:"فيزا"};
+let S={},K=[],E=[],U=null,ex,day,tm,mt,reg=false,after=null;
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function go(n){for(let i=1;i<=7;i++)$("v"+i).classList.toggle("hide",i!==n);if(n===2)mine()}
+async function init(){const{data:s}=await SB.from("settings").select();(s||[]).forEach(r=>S[r.k]=r.v);
+const{data:e}=await SB.from("experts").select().eq("active",true).order("created_at");E=e||[];
+const{data:{session}}=await SB.auth.getSession();U=session?.user||null;
+$("pl").textContent=S.platform||"وسيط الخبراء";$("tg").textContent=S.tagline||"";if(S.logo){$("lg").src=S.logo;$("lg").classList.remove("hide")}if(S.color)document.documentElement.style.setProperty("--ac",S.color);
+const{data:kb}=await SB.from("blocks").select().eq("active",true).order("pos");K=kb||[];$("ca").href="tel:"+S.phone;$("cw").href="https://wa.me/"+S.whatsapp;$("ce").href="mailto:"+S.email;head();list()}
+function head(){$("who").innerHTML=U?`<span class="m">${esc(U.user_metadata?.name||U.email)}</span> <button class="o" onclick="out()">خروج</button>`:`<button class="o" onclick="login()">دخول</button>`}
+function list(){$("v1").innerHTML=K.map(k=>`<div class="c">${k.image?`<img src="${esc(k.image)}" style="width:100%;border-radius:10px;margin-bottom:8px">`:""}<b>${esc(k.title)}</b><p class="m" style="margin:4px 0 0;white-space:pre-wrap">${esc(k.body)}</p></div>`).join("")+E.map((e,i)=>`<div class="c"><div class="r"><div>${e.photo?`<img src="${esc(e.photo)}" style="width:46px;height:46px;border-radius:50%;object-fit:cover;float:right;margin-left:10px">`:""}<b>${esc(e.name)}</b><div class="m">${esc(e.field)} · ${(e.days||[]).map(d=>DN[d]).join("، ")}</div><div class="m">${esc(e.bio)}</div><button class="o" style="padding:3px 8px;font-size:13px" onclick="$('cv${i}').classList.toggle('hide')">السيرة الذاتية</button><div id="cv${i}" class="m hide">${esc(e.cv)}<br>📄 شهادات الخبرة تُراجع من المنصة قبل التعاقد.</div></div><div style="text-align:left"><div class="pr">${e.price} ج.م/س</div><button onclick="book(${i})" style="margin-top:6px">احجز</button></div></div></div>`).join("")||'<div class="c m">لا خبراء حاليًا.</div>'}
+function login(a){after=a??null;reg=false;sw2();go(4)}function sw(){reg=!reg;sw2()}
+function sw2(){$("at").textContent=reg?"إنشاء حساب":"دخول";$("ub").textContent=reg?"إنشاء الحساب":"دخول";$("un").classList.toggle("hide",!reg);$("up").classList.toggle("hide",!reg);$("uer").textContent=""}
+async function auth(){const e=$("ue").value.trim(),w=$("uw").value,er=$("uer");if(!e){er.textContent="البريد الإلكتروني مطلوب";return}if(w.length<6){er.textContent="الرقم السري 6 خانات على الأقل";return}
+let r;if(reg){r=await SB.auth.signUp({email:e,password:w,options:{data:{name:$("un").value.trim(),phone:$("up").value.trim()}}});if(!r.error&&!r.data.session){er.textContent="تم إنشاء الحساب. أكّد بريدك من الرسالة ثم سجّل الدخول.";return}}
+else r=await SB.auth.signInWithPassword({email:e,password:w});
+if(r.error){er.textContent=r.error.message;return}U=r.data.user;head();if(after!=null){const a=after;after=null;book(a)}else go(1)}
+async function out(){await SB.auth.signOut();U=null;head();go(1)}
+const ky=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+async function book(i){if(!U){login(i);return}ex=E[i];day=tm=mt=null;$("bt").textContent="حجز مع "+ex.name;$("pay").classList.add("hide");$("dn").classList.add("hide");$("ber").textContent="";
+const t=new Date(),ds=[];for(let k=0;k<14&&ds.length<7;k++){const d=new Date(t.getFullYear(),t.getMonth(),t.getDate()+k);if((ex.days||[]).includes(d.getDay()))ds.push(d)}
+$("dy").innerHTML=ds.map(d=>`<button onclick="pd('${ky(d)}',this)">${DN[d.getDay()]} ${d.getDate()}/${d.getMonth()+1}</button>`).join("");$("tm").innerHTML='<span class="m">اختر اليوم</span>';
+$("pm").innerHTML=Object.keys(NM).map(k=>S["pay_"+k]?`<button onclick="pk('${k}',this)">${NM[k]}</button>`:"").join("");$("tot").textContent=ex.price+" ج.م";go(5)}
+const sel=(id,b)=>{document.querySelectorAll("#"+id+" button").forEach(x=>x.classList.remove("on"));b.classList.add("on")};
+async function pd(k,b){day=k;tm=null;sel("dy",b);const{data}=await SB.rpc("taken",{p:ex.id});const tk=(data||[]).filter(x=>x.day===k).map(x=>x.tm);
+$("tm").innerHTML=(ex.times||[]).map(x=>`<button ${tk.includes(x)?"disabled":""} onclick="tm='${x}';sel('tm',this)">${x}</button>`).join("")}
+function pk(k,b){mt=k;sel("pm",b);const v=S["pay_"+k];$("pv").textContent=v;$("pay").classList.remove("hide");$("qr").innerHTML="";try{new QRCode($("qr"),{text:v,width:170,height:170})}catch(e){}}
+function cp(){try{navigator.clipboard.writeText(S["pay_"+mt])}catch(e){}}
+async function done(){if(!day||!tm||!mt){$("ber").textContent="اختر اليوم والوقت وطريقة الدفع";return}
+const m=U.user_metadata||{},{error}=await SB.from("bookings").insert({user_id:U.id,expert_id:ex.id,expert_name:ex.name,day,tm,price:ex.price,method:NM[mt],client_name:m.name||"",client_phone:m.phone||"",client_email:U.email});
+if(error){$("ber").textContent=error.code==="23505"?"هذا الموعد حُجز للتو، اختر غيره":error.message;return}
+$("pay").classList.add("hide");$("dn").classList.remove("hide");$("dn").textContent="✅ سُجّل حجزك وينتظر تأكيد المنصة بعد مراجعة الدفع. سنتواصل معك.";
+window.open("https://wa.me/"+S.whatsapp+"?text="+encodeURIComponent(`حجز جديد: ${ex.name} - ${day} ${tm} - ${ex.price} ج.م - ${NM[mt]} - ${m.name||U.email}`),"_blank")}
+async function mine(){if(!U){$("v2").innerHTML='<div class="c">سجّل الدخول لترى حجوزاتك. <button onclick="login()">دخول</button></div>';return}
+const{data}=await SB.from("bookings").select().order("created_at",{ascending:false}),L={pending:"بانتظار التأكيد",confirmed:"مؤكد",cancelled:"ملغي"};
+$("v2").innerHTML=(data||[]).map(b=>`<div class="c"><div class="r"><div><b>${esc(b.expert_name)}</b><div class="m">${b.day} ${esc(b.tm)} · ${b.price} ج.م</div></div><span class="m">${L[b.status]||b.status}</span></div></div>`).join("")||'<div class="c m">لا حجوزات.</div>'}
+async function apply(){const g=i=>$(i).value.trim();if(!g("an")||!g("af")||!(g("aph")||g("aem"))){$("aer").textContent="الاسم والمجال والهاتف أو البريد مطلوبة";return}
+const{error}=await SB.from("applications").insert({name:g("an"),field:g("af"),price:g("apr"),phone:g("aph"),email:g("aem"),avail:g("aav"),bio:g("abi"),cv:g("acv")});
+$("aer").textContent=error?error.message:"✅ وصل طلبك وسنراجعه ونتواصل معك.";}
+function pg(k){$("pt").textContent=k==="about"?"من نحن":"الشروط والخصوصية";$("pb").textContent=S[k]||"لم تُضف بعد.";go(7)}
+async function sendQ(){const g=i=>$(i).value.trim();if(!g("qn")||!g("qc")||!g("qm")){$("qe").textContent="أكمل كل الحقول";return}
+const{error}=await SB.from("inquiries").insert({name:g("qn"),contact:g("qc"),message:g("qm")});$("qe").textContent=error?error.message:"✅ وصلت رسالتك وسنرد عليك قريبًا."}
+init();
+</script></body></html>
